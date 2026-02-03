@@ -1,0 +1,32 @@
+# ======================
+# Frontend (React)
+# ======================
+Green-Basket-Frontend/node_modules/
+Green-Basket-Frontend/build/
+Green-Basket-Frontend/dist/
+Green-Basket-Frontend/.env
+
+# ======================
+# Backend (Node / Express)
+# ======================
+Green-Basket-Backend/node_modules/
+Green-Basket-Backend/dist/
+Green-Basket-Backend/.env
+
+# ======================
+# Logs
+# ======================
+*.log
+logs/
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Editor / IDE
+# ======================
+.vscode/
+.idea/

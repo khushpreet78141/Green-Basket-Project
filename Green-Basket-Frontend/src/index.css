@@ -1,0 +1,17 @@
+@import "tailwindcss";
+.green{
+  background-color: rgb(23, 57, 52);
+}
+.textgreen{
+  color: rgb(23, 57, 52);
+}
+.bordergreen{
+  border: 1px solid rgb(23, 57, 52);
+}
+.darkpink{
+  background-color: rgb(109, 27, 75);
+}
+
+.light{
+  background-color: rgb(253, 250, 240);
+}
