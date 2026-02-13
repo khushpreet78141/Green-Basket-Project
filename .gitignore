@@ -1,32 +1,26 @@
-# ======================
-# Frontend (React)
-# ======================
-Green-Basket-Frontend/node_modules/
-Green-Basket-Frontend/build/
-Green-Basket-Frontend/dist/
-Green-Basket-Frontend/.env
+# dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
 
-# ======================
-# Backend (Node / Express)
-# ======================
-Green-Basket-Backend/node_modules/
-Green-Basket-Backend/dist/
-Green-Basket-Backend/.env
+# env files
+.env
+client/.env
+server/.env
 
-# ======================
-# Logs
-# ======================
-*.log
-logs/
+# build output
+dist/
+build/
 
-# ======================
-# OS files
-# ======================
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
 .DS_Store
 Thumbs.db
 
-# ======================
-# Editor / IDE
-# ======================
-.vscode/
-.idea/
+# misc
+coverage/
+

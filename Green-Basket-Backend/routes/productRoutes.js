@@ -7,10 +7,11 @@ import Cart from '../models/cartSchema.js';
 
 
 
+
 //get all collection
 router.get('/collection', async(req, res) => {
     try{
-        const products = await Products.find({})
+        const products = await Products.find({}).sort({createdBy:-1})
         
         res.status(200).json({
             success:true,
@@ -119,7 +120,6 @@ router.get("/searchInput",async(req,res)=>{
 })
 
 
-
 //you might need section acc to latest created item in cart
 router.get("/recommended",async(req,res)=>{
     try{
@@ -152,7 +152,7 @@ router.get("/recommended",async(req,res)=>{
 
 router.get("/sortBy",async(req,res)=>{
     try{ 
-          console.log("SORT ROUTE HIT");
+          
     const { byprice , bycategory } = req.query
     const filtercategory = {}
     let sortoption = {}
@@ -187,7 +187,7 @@ router.get("/sortBy",async(req,res)=>{
 router.get("/getOneitem",async(req,res)=>{
     try{
          const item = await Products.findOne({})
-         console.log(item)
+         
          res.status(200).json({
             success:true,
             data:item
@@ -200,6 +200,32 @@ router.get("/getOneitem",async(req,res)=>{
         })
     }
    
+
+})
+//to get specific item detail on clicking image
+router.get("/specificDetail/:id",async(req,res)=>{
+    try{
+
+    
+    const {id} = req.params;
+    const findProduct = await Products.findById(id);
+    if(!findProduct){
+        return res.status(404).json({
+            success:false,
+            message:"product not found"
+        })
+    }
+    res.status(200).json({
+        success:true,
+        data:findProduct
+    })
+    }catch(err){
+        console.error(err)
+        res.status(500).json({
+            success:false,
+            message:"Internal server Error"
+        })
+    }
 
 })
 

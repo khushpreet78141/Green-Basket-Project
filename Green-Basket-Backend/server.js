@@ -5,7 +5,8 @@ import cors from 'cors'
 import productRoutes from "./routes/productRoutes.js"
 import paymentRoutes from "./routes/paymentRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
-
+import userRoutes from "./routes/userRoutes.js"
+import adminRoutes from "./routes/adminRoutes.js"
 
 const app = express()
 //middlewares
@@ -21,6 +22,9 @@ mongoose.connect(process.env.MONGO_URI)
 app.use("/api/product",productRoutes);
 app.use("/api/payment",paymentRoutes);
 app.use("/api/cart",cartRoutes);
+app.use("/api/user",userRoutes);
+app.use("/api/admin",adminRoutes);
+
 
 //server
 const port = process.env.PORT || 3000

@@ -2,25 +2,32 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 const orderSchema = new Schema({
-    orderId: {
-    type: String,
-    unique: true,
-    required: true,
+   
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"signUpSchema",
+    required:true
   },
-  cartId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Cart",
+    orderId:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    items:[
+        {
+            productId:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Products",
+                required:true
+            },
+            
+            quantity:Number
+        }
+    ],
+    totalAmount:{
+        type:Number,
         required:true
     },
-    productId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Products",
-        required:true
-    },
-
-    item:String,
-    quantity:Number,
-    totalAmount:Number,
     status:{
         type:String,
         enum:["PENDING","PAID"],

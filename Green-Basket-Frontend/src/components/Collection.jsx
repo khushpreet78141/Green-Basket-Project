@@ -1,19 +1,23 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import {  toast } from 'react-toastify';
+import {useDispatch,useSelector} from 'react-redux'
+import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
+import { Link } from 'react-router-dom';
 const Collection = () => {
+  
     const [allCollection, setallCollection] = useState([])
     const [SortbyCategory, setSortbyCategory] = useState("")
    const [SortbyPrice, setSortbyPrice] = useState("")
+   const dispatch = useDispatch();
+   const cartItems = useSelector((state)=>state.cart.cartItems);
     useEffect(() => {
       const fetchDetails = async()=>{
         const res = await fetch(`http://localhost:3000/api/product/collection`,{method:"GET",headers:{"Content-Type":"application/json"}})
         const data = await res.json();
         setallCollection(data.data)
       }
-      fetchDetails()
-
-    
+      fetchDetails() 
     }, [])
    useEffect(() => {
      const fetchDetails = async()=>{
@@ -21,8 +25,6 @@ const Collection = () => {
       const res = await fetch(`http://localhost:3000/api/product/sortBy?byprice=${SortbyPrice}&bycategory=${SortbyCategory}`,{method:"GET",headers:{"Content-Type":"application/json"}})
       const data = await res.json()
       setallCollection(data.data)
-      
-
      }
      fetchDetails();
      
@@ -41,10 +43,8 @@ progress: undefined,
 theme: "dark",
 
 });
-      const arr = allCollection.map(item=>item._id === pdt._id?{...item,quantity:item.quantity+1}:item);
-      setallCollection(arr);
-      const res = await fetch(`http://localhost:3000/api/cart/addingcartItems/${pdt._id}`,{method:"POST",headers:{"Content-Type":"application/json"}})
-
+      
+  dispatch(addToCart({item:pdt}))
   }
 
    const decreaseQty = async(pdt) =>{
@@ -59,9 +59,11 @@ progress: undefined,
 theme: "dark",
 
 });
-      const arr = allCollection.map(item=>item._id === pdt._id && item.quantity>0?{...item,quantity:item.quantity-1}:item);
-      setallCollection(arr);
-      const res = await fetch(`http://localhost:3000/api/cart/removingcartItems/${pdt._id}`,{method:"POST",headers:{"Content-Type":"application/json"}});
+    dispatch(removeFromCart({id:pdt._id,intent:"DECREMENT"}))
+  }
+  const getQuantity = (pdt)=>{
+    const item = cartItems.find(item=>item._id===pdt._id);
+    return item?item.quantity:0;
   }
 
   return (
@@ -91,21 +93,24 @@ theme: "dark",
         
     </select>
 </div>
-     <div className='flex flex-wrap justify-center md:justify-start container gap-5 md:gap-10 md:m-10 m-5 md:mx-20'>
+     <div className='flex flex-wrap  md:justify-start container gap-5 md:gap-10 md:m-10 m-5 md:mx-20'>
       
 
-      {allCollection.map(item=>(
-        <div key={item._id} className='w-36 text-[20px] hover:scale-105 transition-transform rounded-3xl shadow-lg shadow-green-900 flex flex-col items-center textgreen'>
-            <p><img src={item.image.url} alt={item.image.alt} /></p>
+      {allCollection.map(item=>{
+        const quantity = getQuantity(item);
+     
+      return (
+        <div key={item._id} className='md:w-36 w-28 text-[20px] hover:scale-105 transition-transform rounded-3xl shadow-lg shadow-green-900 flex flex-col items-center textgreen'>
+            <p><Link to={`/specificItem/${item._id}`}><img src={item.image?.url} alt={item.image?.alt} /></Link></p>
             <p>{item.name}</p>
-            <p className='text-[16px] '>({item.shop})</p>
+            <p className='text-[14px] '>({item.shop})</p>
             <p className='text-gray-400 text-[16px]'> {item.units}</p>
             <p>₹{item.price}</p>
-            {item.quantity ===0 ? <div><button onClick={()=>increaseQty(item)} className='w-[90px] rounded-4xl m-1 green text-white '>+</button></div>:<p className='w-[100px] green text-white text-center flex gap-2 items-center justify-around rounded-xl'><button onClick={()=>decreaseQty(item)}>-</button><span>{item.quantity}</span><button onClick={()=>increaseQty(item)}>+</button></p>}
-
+            {quantity ===0 ? <div><button onClick={()=>increaseQty(item)} className='w-[90px] rounded-4xl m-1 green text-white cursor-pointer'>+</button></div>:<p className='w-[100px] green text-white text-center flex gap-2 items-center justify-around rounded-xl cursor-pointer'><button onClick={()=>decreaseQty(item)}>-</button><span>{quantity}</span><button onClick={()=>increaseQty(item)}>+</button></p>}
+            
         </div>
 
-      ))}
+      ) })}
     </div>
     </div>
   )

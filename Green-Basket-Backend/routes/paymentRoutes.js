@@ -2,25 +2,27 @@ import express from 'express'
 import mongoose from 'mongoose'
 import OrderDetails from '../models/orderSchema.js'
 const router = express.Router()
-
+import auth from '../middleware/authmiddleware.js'
 //to make payment
-router.post("/proceedPayment", async (req, res) => {
+router.post("/proceedPayment",auth, async (req, res) => {
     try {
-        const { orderId, amount } = req.body
+        const { orderId , amount } = req.body
+        const userId = req.userId
         if (!orderId || !amount) {
             return res.status(400).json({
                 success: false,
                 message: "orderId and amount are required"
             })
         }
-
+        
         const paymentOrder = {
-            id: "order_test_" + Date.now(),
+            paymentId: "order_test_" + Date.now(),
+            userId,
             amount: amount * 100,   //razorpay uses paise
-            currency: INR,
+            currency: "INR",
             status: "SUCCESS"
         }
-
+        
         res.status(200).json({
             success: true,
             paymentOrder
@@ -37,7 +39,7 @@ router.post("/proceedPayment", async (req, res) => {
 })
 
 // to verify successfull that payment has been done
-router.post("/verify-payment", async (req, res) => {
+router.post("/verify-payment",auth, async (req, res) => {
 
     try {
 

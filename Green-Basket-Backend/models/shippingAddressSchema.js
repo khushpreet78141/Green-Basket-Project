@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 
 const addressSchema = new Schema({
   
-    cartId : {
+  userId : {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Cart",
+        ref:"User",
         required:true
     },
 

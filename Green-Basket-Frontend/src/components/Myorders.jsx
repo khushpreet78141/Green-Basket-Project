@@ -1,80 +1,85 @@
-import { div, tr } from 'framer-motion/client'
+
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 const Myorders = () => {
   const [orders, setorders] = useState([])
 
+  const token = useSelector((state)=>state.auth.token);
   useEffect(() => {
     const fetchOrders = async()=>{
-      const res = await fetch("http://localhost:3000/api/cart/getOrderDetails",{method:"GET",headers:{"Content-Type":"application/json"}})
+      if(!token) return;
+      const res = await fetch("http://localhost:3000/api/cart/getOrderDetails",{method:"GET",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`}})
       const data = await res.json()
       setorders(data.data)
     }
     fetchOrders()
-  }, [])
-  console.log(orders)
+  }, [token]);
+
     
   return (
     <>
     <h1 className="greentext font-serif font-semibold text-2xl mb-6 m-5">
   Your Orders 
 </h1>
-
-<div className="overflow-x-auto bg-white  rounded-2xl shadow-md">
-  <table className="min-w-full border-collapse">
+{orders.length===0 ? <div className='md:text-4xl text-xl font-bold text-center md:mt-20'>No orders yet!</div>:<div className="overflow-x-auto bg-white  rounded-2xl shadow-md">
+  <table className="md:min-w-full border-collapse">
     <thead className=" green">
       <tr>
-        <th className="px-6 py-3 text-left text-sm font-semibold text-white">
+        <th className="md:px-6 px-2 py-3 text-left text-sm font-semibold text-white">
           Order ID
         </th>
-        <th className="px-6 py-3 text-left text-sm font-semibold text-white">
-          Item
+        <th className="md:px-6 px-2 py-3 text-center text-sm font-semibold text-white">
+          Date & Time
         </th>
-        <th className="px-6 py-3 text-center text-sm font-semibold text-white">
-          Quantity
+        <th className="md:px-6 px-2 py-3 text-left text-sm font-semibold text-white">
+          quantity
         </th>
-        <th className="px-6 py-3 text-right text-sm font-semibold text-white">
+
+
+          
+        <th className="md:px-6 px-2 py-3 text-right text-sm font-semibold text-white">
           Total Price
         </th>
-        <th className="px-6 py-3 text-center text-sm font-semibold text-white">
+        <th className="md:px-6 px-2 py-3 text-center text-sm font-semibold text-white">
           Status
         </th>
       </tr>
     </thead>
-
+          
     <tbody className="divide-y">
-      {orders.map((item) => (
+      {orders.map((order) => (
         <tr
-          key={item.orderId}
+          key={order.orderId}
           className="hover:bg-green-50 transition"
         >
-          <td className="px-6 py-4 text-sm text-gray-700">
-            #{item.orderId}
+          <td className="md:px-6 py-4 text-sm text-gray-700">
+            #{order.orderId}
           </td>
 
-          <td className="px-6 py-4 text-sm text-gray-700">
-            {item.item}
+          <td className="md:px-6 px-2 py-4 text-center text-sm text-gray-700">
+  {new Date(order.createdAt).toLocaleString("en-IN")}
+</td>
+          <td className="md:px-6 px-4 py-4 text-sm text-gray-700">
+            {order.items.reduce((sum,item)=>sum+item.quantity,0)}
+           
           </td>
 
-          <td className="px-6 py-4 text-center text-sm text-gray-700">
-            {item.quantity}
+          <td className="md:px-6 py-4 text-right text-sm font-medium text-gray-800">
+            ₹{order.totalAmount}
           </td>
 
-          <td className="px-6 py-4 text-right text-sm font-medium text-gray-800">
-            ₹{item.totalAmount}
-          </td>
-
-          <td className="px-6 py-4 text-center">
+          <td className="md:px-6 py-4 text-center">
             <span
               className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                item.status === "PAID"
+                order.status === "PAID"
                   ? "bg-green-100 text-green-700"
-                  : item.status === "PENDING"
+                  : order.status === "PENDING"
                   ? "bg-yellow-100 text-yellow-700"
                   : "bg-red-100 text-red-700"
               }`}
             >
-              {item.status}
+              {order.status}
             </span>
           </td>
         </tr>
@@ -82,8 +87,9 @@ const Myorders = () => {
     </tbody>
   </table>
   
-</div>
-<Link to="/"><button className='bg-blue-600 p-2 mt-20 ml-30 md:ml-[45vw] md:mt-50 rounded-2xl text-white font-bold font-serif'>Back to Home</button></Link>
+</div>}
+
+<Link to="/"><button className='bg-blue-600 p-2 md:mt-20 mt-10 ml-30 md:ml-[45vw] md:mt-50 rounded-2xl text-white font-bold font-serif cursor-pointer'>Back to Home</button></Link>
 </>
   )
 }
