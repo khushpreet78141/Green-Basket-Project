@@ -1,8 +1,10 @@
 import React from 'react'
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  const [apiSuccess, setApiSuccess] = useState(false);
      const {
         register,
         handleSubmit,
@@ -17,13 +19,15 @@ const SignUp = () => {
         const res = await fetch("http://localhost:3000/api/user/signUp",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
         const result = await res.json()
         if(!res.ok || !result.success){
-          
+          setApiSuccess(false)
+          alert(result.message)
           setError("root",{message:result.message || "signup failed"})
           return;
         }
         localStorage.clear()
           localStorage.removeItem("token");
 localStorage.removeItem("user");
+        setApiSuccess(true)
           setTimeout(() => {
 
             navigate("/login")
@@ -34,6 +38,7 @@ localStorage.removeItem("user");
         reset();
                 
         }catch(err){
+          setApiSuccess(false)
           alert(err)
           setError("root",{message:result.message || "Server Error"})
         }

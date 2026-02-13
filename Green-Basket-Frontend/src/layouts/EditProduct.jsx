@@ -41,13 +41,10 @@ progress: undefined,
 theme: "light",
 
 });
-            console.log("product edited successfully"); 
-            reset();
+            console.log("product edited successfully");            
             setTimeout(() => {
               navigate('/admin')
-            }, 1000);
-            
-            
+            }, 800);    
         }
        }  
 

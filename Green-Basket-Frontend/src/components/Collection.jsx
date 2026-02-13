@@ -103,8 +103,8 @@ theme: "dark",
         <div key={item._id} className='md:w-36 w-28 text-[20px] hover:scale-105 transition-transform rounded-3xl shadow-lg shadow-green-900 flex flex-col items-center textgreen'>
             <p><Link to={`/specificItem/${item._id}`}><img src={item.image?.url} alt={item.image?.alt} /></Link></p>
             <p>{item.name}</p>
-            <p className='text-[14px] '>({item.shop})</p>
-            <p className='text-gray-400 text-[16px]'> {item.units}</p>
+            <p className='text-[12px] md:text-[14px]'>({item.shop})</p>
+            <p className='text-gray-400 text-[14px]'> {item.units}</p>
             <p>₹{item.price}</p>
             {quantity ===0 ? <div><button onClick={()=>increaseQty(item)} className='w-[90px] rounded-4xl m-1 green text-white cursor-pointer'>+</button></div>:<p className='w-[100px] green text-white text-center flex gap-2 items-center justify-around rounded-xl cursor-pointer'><button onClick={()=>decreaseQty(item)}>-</button><span>{quantity}</span><button onClick={()=>increaseQty(item)}>+</button></p>}
             
