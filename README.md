@@ -1,52 +1,71 @@
-# 🛒 Green Basket
+# 🛒 Green Basket – Full Stack Grocery E-Commerce Application
 
-Green Basket is a full-stack grocery e-commerce web application built using the **MERN stack**. It allows users to browse grocery products, search items, add them to the cart, manage quantities, and proceed with checkout by providing shipping details. This project is built to simulate a real-world online grocery shopping experience and to strengthen full-stack development skills.
+Green Basket is a full-stack grocery shopping web application built using **React + Redux (Frontend)** and **Node.js + Express + MongoDB (Backend)**.
+
+The platform allows users to browse products, manage cart, place orders, and enables admins to manage inventory through a protected dashboard.
 
 ---
 
 ## 🚀 Features
 
+### 👤 User Features
+
+- User Signup & Login (JWT Authentication)
+- Persistent login session
 - Browse products by categories (Fruits, Vegetables, Snacks, Beverages)
 - Search products by name
+- View detailed product page
 - Add products to cart
-- Increase or decrease product quantity
-- View and review cart items
-- Enter shipping details before placing an order
-- RESTful backend APIs
-- Separate frontend and backend architecture
+- Increase / decrease product quantity
+- Remove items from cart
+- Enter shipping address before placing an order
+- Place order with demo payment gateway
+- View order history
+- View individual order details
 
 ---
 
-## 🛠️ Planned / In Progress
+### 🧑‍💼 Admin Features
 
-- 🔐 User authentication (Login / Signup)
-- 💳 Payment gateway integration (on hold due to PAN card requirement)
-- 📦 Order history
-- 🧑‍💼 Admin dashboard
+- Role-based access control (Admin protected routes)
+- Add new products
+- Edit existing products
+- Delete products
+- Manage product stock
+- View all orders
+
+---
+
+## ⚙️ Technical Highlights
+
+- RESTful API architecture
+- Separate frontend and backend structure
+- JWT-based authentication
+- Middleware-based authorization
+- Redux Toolkit for global state management
+- MongoDB database integration
+- Order management system
+- Protected routes (frontend + backend)
 
 ---
 
 ## 🧰 Tech Stack
 
-**Frontend**
-- React
-- JavaScript
-- CSS
+### Frontend
+- React.js
+- Redux Toolkit
+- React Router
+- Tailwind CSS
 
-**Backend**
+### Backend
 - Node.js
 - Express.js
-
-**Database**
 - MongoDB
-
-**Tools**
-- Git
-- GitHub
 - Mongoose
-- REST APIs
+- JSON Web Token (JWT)
 
 ---
+
 **Backend setup**
 
 - cd Green-Basket-Backend
