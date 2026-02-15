@@ -7,10 +7,6 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err)=>{console.error(err)})
 
 
-
-
-
-
 const sampleProducts = [
   // 🍎 FRUITS (4)
   {
@@ -234,15 +230,6 @@ const sampleProducts = [
     totalSold: 980
   }
 ];
-
-
-
-
-
-
-
-
-
 
 
 
