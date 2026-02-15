@@ -32,7 +32,7 @@ const PaymentModal = () => {
 
     if (!cartItems) return;
     
-    const res = await fetch(`http://localhost:3000/api/cart/postOrderDetails`, {
+    const res = await fetch(`https://green-basket-project.onrender.com/api/cart/postOrderDetails`, {
       method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({
         items: cartItems,
         totalAmount: total
@@ -41,9 +41,9 @@ const PaymentModal = () => {
     const data1 = await res.json();
 
 
-    const makePayment = await fetch(`http://localhost:3000/api/payment/proceedPayment`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({orderId:data1.order.orderId,amount:data1.order.totalAmount})});
+    const makePayment = await fetch(`https://green-basket-project.onrender.com/api/payment/proceedPayment`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({orderId:data1.order.orderId,amount:data1.order.totalAmount})});
     const data2 = await makePayment.json()
-    const verifiedPayment = await fetch(`http://localhost:3000/api/payment/verify-payment`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({paymentId:data2.paymentOrder.paymentId,orderId:data1.order.orderId,status:data2.paymentOrder.status})});
+    const verifiedPayment = await fetch(`https://green-basket-project.onrender.com/api/payment/verify-payment`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({paymentId:data2.paymentOrder.paymentId,orderId:data1.order.orderId,status:data2.paymentOrder.status})});
     const isVerified = await verifiedPayment.json()
     if(isVerified.success){
       setPaymentverified(true)

@@ -25,7 +25,7 @@ const OrderDetails = () => {
 
   const onSubmit = async (data) => {
   
-    const res = await fetch(`http://localhost:3000/api/cart/shippingAddress`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(data)})
+    const res = await fetch(`https://green-basket-project.onrender.com/api/cart/shippingAddress`,{method:"POST",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(data)})
     const result = await res.json()
     if(result.success){
        setTimeout(() => {

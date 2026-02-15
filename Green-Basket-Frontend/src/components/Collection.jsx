@@ -13,7 +13,7 @@ const Collection = () => {
    const cartItems = useSelector((state)=>state.cart.cartItems);
     useEffect(() => {
       const fetchDetails = async()=>{
-        const res = await fetch(`http://localhost:3000/api/product/collection`,{method:"GET",headers:{"Content-Type":"application/json"}})
+        const res = await fetch(`https://green-basket-project.onrender.com/api/product/collection`,{method:"GET",headers:{"Content-Type":"application/json"}})
         const data = await res.json();
         setallCollection(data.data)
       }
@@ -22,7 +22,7 @@ const Collection = () => {
    useEffect(() => {
      const fetchDetails = async()=>{
       if(SortbyPrice==="" && SortbyCategory==="") return;
-      const res = await fetch(`http://localhost:3000/api/product/sortBy?byprice=${SortbyPrice}&bycategory=${SortbyCategory}`,{method:"GET",headers:{"Content-Type":"application/json"}})
+      const res = await fetch(`https://green-basket-project.onrender.com/api/product/sortBy?byprice=${SortbyPrice}&bycategory=${SortbyCategory}`,{method:"GET",headers:{"Content-Type":"application/json"}})
       const data = await res.json()
       setallCollection(data.data)
      }

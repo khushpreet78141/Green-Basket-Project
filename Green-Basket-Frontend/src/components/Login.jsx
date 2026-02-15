@@ -18,7 +18,7 @@ const Login = () => {
            const navigate = useNavigate();
           const onSubmit = async(data)=>{
             try{
-            const res = await fetch("http://localhost:3000/api/user/login",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
+            const res = await fetch("https://green-basket-project.onrender.com/api/user/login",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
             const result = await res.json()
             
             if(!res.ok || !result.success){

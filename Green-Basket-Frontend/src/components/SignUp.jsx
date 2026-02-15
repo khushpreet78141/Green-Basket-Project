@@ -16,7 +16,7 @@ const SignUp = () => {
       const navigate = useNavigate()
       const onSubmit = async(data)=>{
         try{
-        const res = await fetch("http://localhost:3000/api/user/signUp",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
+        const res = await fetch("https://green-basket-project.onrender.com/api/user/signUp",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)});
         const result = await res.json()
         if(!res.ok || !result.success){
           setApiSuccess(false)
@@ -29,12 +29,9 @@ const SignUp = () => {
 localStorage.removeItem("user");
         setApiSuccess(true)
           setTimeout(() => {
-
             navigate("/login")
-
           }, 2000);
-          
-        
+              
         reset();
                 
         }catch(err){

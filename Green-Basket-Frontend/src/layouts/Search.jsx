@@ -20,7 +20,7 @@ const Search = () => {
     }
     const fetchDetails = async () => {
       setfilteredProducts([])
-      const res = await fetch(`http://localhost:3000/api/product/searchInput?q=${query}`, { method: "GET", headers: { "content-Type": "application/json" } })
+      const res = await fetch(`https://green-basket-project.onrender.com/api/product/searchInput?q=${query}`, { method: "GET", headers: { "content-Type": "application/json" } })
       const data = await res.json();
       setfilteredProducts(data.data)
     }

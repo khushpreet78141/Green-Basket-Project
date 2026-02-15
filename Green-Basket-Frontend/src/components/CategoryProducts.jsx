@@ -16,7 +16,7 @@ const CategoryProducts = () => {
     useEffect(() => {
 
       const fetchDetails = async()=>{
-        const res = await fetch(`http://localhost:3000/api/product/category/${category}`,{method:"GET",headers:{"Content-Type":"application/json"}})
+        const res = await fetch(`https://green-basket-project.onrender.com/api/product/category/${category}`,{method:"GET",headers:{"Content-Type":"application/json"}})
         const data = await res.json()
         setselectedProduct(data.data);
 
@@ -28,7 +28,7 @@ const CategoryProducts = () => {
 
     useEffect(() => {
       const fetchDetails = async() =>{
-        const res = await fetch(`http://localhost:3000/api/product/category/${category}/sortBy?price=${sortOption}`)
+        const res = await fetch(`https://green-basket-project.onrender.com/api/product/category/${category}/sortBy?price=${sortOption}`)
         const data = await res.json();
         setselectedProduct(data.data);
       }

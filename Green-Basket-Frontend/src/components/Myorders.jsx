@@ -9,7 +9,7 @@ const Myorders = () => {
   useEffect(() => {
     const fetchOrders = async()=>{
       if(!token) return;
-      const res = await fetch("http://localhost:3000/api/cart/getOrderDetails",{method:"GET",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`}})
+      const res = await fetch("https://green-basket-project.onrender.com/api/cart/getOrderDetails",{method:"GET",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`}})
       const data = await res.json()
       setorders(data.data)
     }

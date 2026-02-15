@@ -23,8 +23,9 @@ function App() {
   useEffect(() => {
   const token = localStorage.getItem("token");
    const user = localStorage.getItem("user");
+     const parsedUser = user && user !== "undefined" ? JSON.parse(user) : null;
   if(token && user){
-    dispatch(loginSuccess({token,user:JSON.parse(user)}));
+    dispatch(loginSuccess({token,user:parsedUser}));
 
   }
   
@@ -60,8 +61,6 @@ theme="dark"
 <Route path="searchbar" element={<Search/>}/>
 
 <Route path="/placeOrder" element={<OrderDetails/>}/>
-
-
 
 <Route path="yourOrders" element={<Myorders/>}/>
 <Route path="signUp" element={<SignUp/>} />

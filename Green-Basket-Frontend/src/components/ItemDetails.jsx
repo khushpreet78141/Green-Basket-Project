@@ -11,7 +11,7 @@ const ItemDetails = () => {
     const cartItems = useSelector((state)=>state.cart.cartItems);
     useEffect(() => {
         const fetchDetails = async()=>{
-            const res = await fetch(`http://localhost:3000/api/product/getOneitem`,{method:"GET",headers:{"Content-Type":"application/json"}});
+            const res = await fetch(`https://green-basket-project.onrender.com/api/product/getOneitem`,{method:"GET",headers:{"Content-Type":"application/json"}});
         const reqdata = await res.json();
         setpdtdetail(reqdata.data);
         }

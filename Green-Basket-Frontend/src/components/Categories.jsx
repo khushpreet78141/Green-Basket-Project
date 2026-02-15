@@ -9,7 +9,7 @@ const Categories = () => {
 
         const fetchDetails = async()=>{
             setcategories([])
-            const res = await fetch("http://localhost:3000/api/product/collection",{method:"GET",header:{"Content-Type":"application/json"}})
+            const res = await fetch("https://green-basket-project.onrender.com/api/product/collection",{method:"GET",header:{"Content-Type":"application/json"}})
             const data = await res.json()
             setcategories(data.data)
         }

@@ -18,7 +18,7 @@ const AddProduct = () => {
           const navigate = useNavigate()
 
       const onSubmit = async(data) => {
-        const res = await fetch("http://localhost:3000/api/admin/create-product",{method:'POST',headers:{"Content-Type":"application/json",Authorization:` Bearer ${token}`},body:JSON.stringify(data)})
+        const res = await fetch("https://green-basket-project.onrender.com/api/admin/create-product",{method:'POST',headers:{"Content-Type":"application/json",Authorization:` Bearer ${token}`},body:JSON.stringify(data)})
         if(res.ok){
             toast.success('created successfully', {
 position: "top-right",

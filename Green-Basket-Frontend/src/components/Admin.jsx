@@ -21,7 +21,7 @@ const Admin = () => {
     
     const fetchProduct = async()=>{
     try{
-    const res = await fetch("http://localhost:3000/api/product/collection",{method:'GET',headers:{"Content-Type":"application/json"}})
+    const res = await fetch("https://green-basket-project.onrender.com/api/product/collection",{method:'GET',headers:{"Content-Type":"application/json"}})
     if(!res.ok) throw new Error("Failed to fetch products")
     const data = await res.json();
     setproduct(data.data);
@@ -40,7 +40,7 @@ fetchProduct();
   const handleDelete = async(id)=>{
     const confirmed = window.confirm("are you sure  to delete this product ")
     if(confirmed){
-const res = await fetch(` http://localhost:3000/api/admin/deleteProduct/${id}`,{method:"DELETE",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token} `}} )
+const res = await fetch(` https://green-basket-project.onrender.com/api/admin/deleteProduct/${id}`,{method:"DELETE",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token} `}} )
     if(!res.ok) return;
     setproduct(product=>product.filter(item=>item._id !== id))
     toast.warn('deleted successfully', {

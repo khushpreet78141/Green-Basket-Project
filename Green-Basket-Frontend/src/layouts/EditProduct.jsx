@@ -18,7 +18,7 @@ const EditProduct = () => {
 
   useEffect(() => {
     const fetchProduct = async()=>{
-      const res = await fetch(`http://localhost:3000/api/admin/getpdt/${id}`,{method:"GET",headers:{"Content-Type":"application/json"}});
+      const res = await fetch(`https://green-basket-project.onrender.com/api/admin/getpdt/${id}`,{method:"GET",headers:{"Content-Type":"application/json"}});
       const result = await res.json();
       console.log(result)
       reset(result.data) //inject api data into form
@@ -28,7 +28,7 @@ const EditProduct = () => {
 
 
     const onSubmit = async(data) => {
-       const res = await fetch(`http://localhost:3000/api/admin/saveproduct/${id}`,{method:"PUT",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(data)});
+       const res = await fetch(`https://green-basket-project.onrender.com/api/admin/saveproduct/${id}`,{method:"PUT",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify(data)});
         if(res.ok){
           toast.success('edited successfully!', {
 position: "top-right",

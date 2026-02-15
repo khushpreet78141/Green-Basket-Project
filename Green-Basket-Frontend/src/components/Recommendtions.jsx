@@ -8,7 +8,7 @@ const Recommendtions = () => {
   const [recommendedItems, setrecommendedItems] = useState([])
   useEffect(() => {
     const fetchDetails = async()=>{
-      const res = await fetch("http://localhost:3000/api/product/recommended",{method:"GET",headers:{"Content-Type":"application/json"}})
+      const res = await fetch("https://green-basket-project.onrender.com/api/product/recommended",{method:"GET",headers:{"Content-Type":"application/json"}})
       const data = await res.json()
       setrecommendedItems(data.data)
     }
