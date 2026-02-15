@@ -54,14 +54,14 @@ const Bestseller = () => {
   return (
     <div className='p-9'>
      <h1 className='md:text-3xl text-xl font-bold textgreen m-5 '> ⭐️ Best Seller for you ⭐️</h1>
-     <div className='flex flex-row p-10 md:gap-10 gap-3 flex-wrap'> 
+     <div className='flex flex-row md:p-10 md:gap-10 gap-4 flex-wrap p-5'> 
       {bestSellerProducts.map(item=>{
         const quantity = getQuantity(item);
         
       return (
-        <div key={item._id} className='md:w-36 w-28 md:text-[20px] text-[18px] hover:scale-105  shadow-2xl shadow-green-950 transition-transform rounded-3xl  flex flex-col items-center textgreen'>
+        <div key={item._id} className='md:w-36 w-24 md:text-[20px] text-[18px] hover:scale-105  shadow-2xl shadow-green-950 transition-transform rounded-3xl  flex flex-col items-center justify-center textgreen'>
             <p><Link to={`/specificItem/${item._id}`}><img src={item.image.url} alt={item.image.alt} /></Link></p>
-            <p>{item.name}</p>
+            <p className='text-[18px]'> {item.name}</p>
             <p className='text-[14px] '>({item.shop})</p>
             <p className='text-gray-400 text-[16px]'>{item.units}</p>
             <p>₹{item.price}</p>
