@@ -10,7 +10,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems)
-  console.log(cartItems)
+
   const deleteCartItem = async (item) => {
     const confirmed = window.confirm("are you sure to remove item from cart?")
 
@@ -84,7 +84,7 @@ const Cart = () => {
                     ? item.quantity * item.price
                     : 0}
                 </td>
-                <td className='bg-white'><button className='bg-red-500 row-span-2 p-2 rounded-2xl text-white ml-5 cursor-pointer' onClick={() => deleteCartItem(item)}>remove</button></td>
+                <td className='bg-white  md:text-right'><button className='bg-red-500 row-span-2 p-2 rounded-2xl text-white ml-5 md:ml-0 cursor-pointer' onClick={() => deleteCartItem(item)}>remove</button></td>
               </tr>
             </tbody>
 

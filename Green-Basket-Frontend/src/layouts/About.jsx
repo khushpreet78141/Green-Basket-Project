@@ -30,7 +30,6 @@ const About = () => {
   <div className='hidden md:block'>
     <img src={trollypng} alt="" className='w-[40vw]  absolute md:right-20  md:top-10'/>
     
-
   </div>
 </section>
     </div>

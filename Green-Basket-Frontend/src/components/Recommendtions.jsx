@@ -6,17 +6,22 @@ import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
 import { Link } from 'react-router-dom';
 const Recommendtions = () => {
   const [recommendedItems, setrecommendedItems] = useState([])
-  useEffect(() => {
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state)=>state.cart.cartItems);
+
+    useEffect(() => {
+
     const fetchDetails = async()=>{
-      const res = await fetch("https://green-basket-project.onrender.com/api/product/recommended",{method:"GET",headers:{"Content-Type":"application/json"}})
-      const data = await res.json()
-      setrecommendedItems(data.data)
+      if(!cartItems.length) return;
+      const latestItem = cartItems[cartItems.length-1]
+      if(!latestItem?.category) return;
+      const res = await fetch(`https://green-basket-project.onrender.com/api/product/recommended/${latestItem.category}`,{method:"GET",headers:{"Content-Type":"application/json"}})
+      const result = await res.json()
+      setrecommendedItems(result.data)
+      console.log(result)
     }
     fetchDetails()
-  }, [])
-   const dispatch = useDispatch();
-     const cartItems = useSelector((state)=>state.cart.cartItems);
-  
+  }, [cartItems])
 
   const increaseQty = async(pdt) => {
     toast(' quantity ⬆️ updated in cart ', {
@@ -50,7 +55,7 @@ const Recommendtions = () => {
 
   }
    const getQuantity = (pdt)=>{
-    const item = cartItems.find(item=>item._id===pdt._id);
+    const item = cartItems?.find(item=>item._id===pdt._id);
     return item?item.quantity:0;
   }
 
