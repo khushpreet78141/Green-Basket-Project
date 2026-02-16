@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { clearCart } from "../redux/slices/cartSlice";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -24,9 +25,12 @@ const Navbar = () => {
   const handleLogout = () => {
     const confirmed = window.confirm("are you sure , you want to Log Out!");
     if (confirmed) {
+      dispatch(clearCart())
       dispatch(logOut());
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      
+    
 
       navigate("/login");
     }

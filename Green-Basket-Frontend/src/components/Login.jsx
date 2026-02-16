@@ -2,11 +2,12 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { loginSuccess } from '../redux/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  //const [apisuccess, setapisuccess] = useState(false)
     const {
             register,
             handleSubmit,
@@ -22,14 +23,19 @@ const Login = () => {
             const result = await res.json()
             
             if(!res.ok || !result.success){
+              
               setError("root",{message:result.message || "Login Failed"})
+              alert(result.message)
+              return;
               
             }
-           
             localStorage.setItem("token",result.token);
             localStorage.setItem("user",JSON.stringify(result.user));
-             dispatch(loginSuccess({token:result.token,user:result.user}));
+
+            dispatch(loginSuccess({token:result.token,user:result.user}));
+
                if(result.success){
+
                 setTimeout(() => {
                    navigate("/");
                 }, 1000);
@@ -37,6 +43,7 @@ const Login = () => {
             }
             reset();
             }catch(err){
+              alert(err.message)
               setError("root",{message:result.message || "Server Error"});
 
             }

@@ -18,7 +18,7 @@ const Recommendtions = () => {
       const res = await fetch(`https://green-basket-project.onrender.com/api/product/recommended/${latestItem.category}`,{method:"GET",headers:{"Content-Type":"application/json"}})
       const result = await res.json()
       setrecommendedItems(result.data)
-      console.log(result)
+
     }
     fetchDetails()
   }, [cartItems])
