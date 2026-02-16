@@ -121,20 +121,21 @@ router.get("/searchInput",async(req,res)=>{
 
 
 //you might need section acc to latest created item in cart
-router.get("/recommended",async(req,res)=>{
+router.get("/recommended/:category",async(req,res)=>{
+    console.log("ROUTE HIT")
+    console.log("PARAM:", req.params.category);
     try{
-        const lastCartItem = await Cart.findOne().sort({createdAt:-1}).populate("productId");
-        if (!lastCartItem || !lastCartItem.productId) {
-      return res.status(200).json({
-        success: true,
-        data: []
-      });
-    }
+        
+    const category = req.params.category
+    
+        
         const recommended = await Products.find({
-            category:lastCartItem.productId.category,
-            _id:{$ne : lastCartItem.productId._id},
+            category:{$regex :new RegExp(`^${category}$`,"i")},
             inStock:true,
         }).limit(7);
+
+        
+
         res.status(200).json({
             success:true,
             data: recommended
